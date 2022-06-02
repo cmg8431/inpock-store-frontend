@@ -1,6 +1,6 @@
 import React from "react";
-import { Footer, Navbar } from "src/components/common";
 import * as S from "./styled";
+import { Footer, Navbar } from "src/components/common";
 
 export const DefaultLayout: React.FC = ({ children }) => {
   return (

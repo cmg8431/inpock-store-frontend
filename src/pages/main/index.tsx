@@ -58,7 +58,7 @@ export const MainPage: React.FC = () => {
             subTitle: "36,000원",
           },
           {
-            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/29/thumb@320_1653808333-d51938a6-3b25-43bc-88da-92f23205ef80.jpeg",
             title: "포멀 조거 pt",
             subTitle: "36,000원",
           },

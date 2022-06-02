@@ -20,7 +20,9 @@ export const Products: React.FC<ProdutsProps> = ({ title, products }) => {
         {products.map((product) => {
           return (
             <S.ProductsContentContainer>
-              <S.ProductsContentImg src={product.url} alt={product.title} />
+              <S.ProductsContentImgWrapper>
+                <S.ProductsContentImg src={product.url} alt={product.title} />
+              </S.ProductsContentImgWrapper>
               <S.ProductsContentTitle>{product.title}</S.ProductsContentTitle>
               <S.ProductsContentSubTitle>{product.subTitle}</S.ProductsContentSubTitle>
             </S.ProductsContentContainer>
