@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const MainPageBannerWrapper = styled.div``;
+export const MainPageBannerWrapper = styled.div`
+  margin-bottom: -120px;
+`;
 
 export const MainPageBannerContainer = styled.div`
   width: 100%;

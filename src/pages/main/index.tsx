@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultLayout } from "src/components";
+import { DefaultLayout, Products } from "src/components";
 import * as S from "./styled";
 import InpockThumbnailPNG from "src/assets/png/InpockThumbnail.png";
 
@@ -19,6 +19,96 @@ export const MainPage: React.FC = () => {
         </S.MainPageBannerContainer>
         <S.MainPageBannerImg src={InpockThumbnailPNG} alt="INPOCKBANNERIMG" />
       </S.MainPageBannerWrapper>
+      <Products
+        title="마켓 오픈했어요 ✨"
+        products={[
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/5/28/thumb@320_1653749757-6ac314d5-7b62-432d-a996-b44be425b908.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+        ]}
+      />
+      <Products
+        title="인기있는 상품 🔥"
+        products={[
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+          {
+            url: "https://d32rratnkhh4zp.cloudfront.net/media/images/2022/6/1/thumb@320_1654012647-e610461e-7b56-4d43-9da6-a306c97b4987.jpeg",
+            title: "포멀 조거 pt",
+            subTitle: "36,000원",
+          },
+        ]}
+      />
     </DefaultLayout>
   );
 };
