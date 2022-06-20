@@ -30,4 +30,5 @@ export const MainPageBannerImg = styled.img`
   position: relative;
   top: -140px;
   -webkit-user-drag: none;
+  cursor: pointer;
 `;
