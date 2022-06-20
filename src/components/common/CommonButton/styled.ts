@@ -33,7 +33,6 @@ export const CommonButton = styled(Button)<{ styleType: string }>`
         color: white;
         font-weight: 600;
         padding: 1.2rem 1rem;
-
         &:active {
           background-color: #ef632b;
         }
@@ -45,9 +44,15 @@ export const CommonButton = styled(Button)<{ styleType: string }>`
         transition: all 0s;
         background-color: rgb(246, 246, 246);
         color: #212529;
-        font-weight: 500;
-        padding: 1.2rem 1rem;
+        font-weight: 400;
+        font-size: 1rem;
+        padding: 1.3rem 1rem;
         text-align: inherit;
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
         &:hover {
           background-color: #eeeeee;
         }
