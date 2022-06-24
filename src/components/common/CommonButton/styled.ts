@@ -17,6 +17,19 @@ export const CommonButton = styled(Button)<{ styleType: string }>`
         }
       `;
     }
+    if (styleType === "defaultBorder") {
+      return css`
+        line-height: 1;
+        margin: 0px;
+        cursor: pointer;
+        user-select: none;
+        /* width: fit-content; */
+        font-size: 0.9rem;
+        padding: calc(0.625rem - 1px) calc(0.75rem - 1px);
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(52, 52, 52);
+      `;
+    }
     if (styleType === "orangeBorder") {
       return css`
         background-color: white;
