@@ -1,30 +1,31 @@
 import { useMutation, UseMutationResult, useQuery, UseQueryResult } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { APIResponse, setAccessToken } from "src/api";
-import { getUser, login, UserProfileResponse } from "src/api/user";
-import { LoginFormValues } from "src/pages";
+import { APIErrorResponse, APIResponse, APIResponseStatusType, setAccessToken } from "src/api";
+import { getUser, login, LoginFormValues, UserProfileResponse } from "src/api/user";
 import useToast from "../useToast";
 
-export interface NonFieldError {
-  data: {
-    non_field_errors: string[];
-  };
-}
-
-export const useLogin = (): UseMutationResult<{ accessToken: string }, APIResponse<NonFieldError>, LoginFormValues> => {
+export const useLogin = (): UseMutationResult<
+  APIResponse<{ accessToken: string; refreshToken: string }>,
+  APIErrorResponse,
+  LoginFormValues
+> => {
   const navigate = useNavigate();
   const { showToast } = useToast();
   return useMutation("useLogin", login, {
-    onSuccess: (data: { accessToken: string; refreshToken: string; user: any }) => {
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("expiredTime", data.user);
-      setAccessToken(data.accessToken);
+    onSuccess: (data: {
+      status: APIResponseStatusType;
+      message: string;
+      result: { accessToken: string; refreshToken: string; user: UserProfileResponse };
+    }) => {
+      localStorage.setItem("accessToken", data.result.accessToken);
+      localStorage.setItem("refreshToken", data.result.refreshToken);
+      setAccessToken(data.result.accessToken);
       navigate("/mypage");
     },
     onError: (data) => {
-      showToast({ visible: true, template: data?.response.data.non_field_errors[0] });
+      showToast({ visible: true, template: data.message });
     },
+    retry: 0,
   });
 };
 
@@ -47,7 +48,7 @@ export const useLogin = (): UseMutationResult<{ accessToken: string }, APIRespon
 //   );
 // };
 
-export const useFetchUser = (): UseQueryResult<UserProfileResponse, APIResponse> => {
+export const useFetchUser = (): UseQueryResult<APIResponse<UserProfileResponse>, APIErrorResponse> => {
   return useQuery(
     "useFetchUser",
     () => {
@@ -61,6 +62,7 @@ export const useFetchUser = (): UseQueryResult<UserProfileResponse, APIResponse>
         setAccessToken(null);
       },
       retry: 0,
+      staleTime: 3600,
     },
   );
 };

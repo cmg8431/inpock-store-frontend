@@ -15,8 +15,18 @@ export const instance = axios.create({
   },
 });
 
+export type APIResponseStatusType = "SUCCESS" | "FAILED";
+
 export interface APIResponse<T = unknown> {
-  response: T;
+  status: APIResponseStatusType;
+  message: string;
+  result: T;
+}
+
+export interface APIErrorResponse {
+  status: "FAILED";
+  message: string;
+  result?: null;
 }
 
 export const setAccessToken = (token: string | null) => {

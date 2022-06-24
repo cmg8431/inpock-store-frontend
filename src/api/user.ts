@@ -1,5 +1,9 @@
-import { LoginFormValues } from "src/pages";
-import { API_SUFFIX, instance } from ".";
+import { APIResponse, API_SUFFIX, instance } from ".";
+
+export interface LoginFormValues {
+  username: string;
+  password: string;
+}
 
 export interface UserProfileResponse {
   username: string;
@@ -11,8 +15,11 @@ export interface UserProfileResponse {
 export const login = async ({
   username,
   password,
-}: LoginFormValues): Promise<{ accessToken: string; refreshToken: string; user: UserProfileResponse }> => {
-  const { data } = await instance.post(API_SUFFIX.LOGIN, { username, password });
+}: LoginFormValues): Promise<APIResponse<{ accessToken: string; refreshToken: string; user: UserProfileResponse }>> => {
+  const { data } = await instance.post(API_SUFFIX.LOGIN, {
+    username,
+    password,
+  });
   return data;
 };
 
