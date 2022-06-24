@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ProductsWrapper = styled.div`
   padding-left: 16px;
+  margin-bottom: 1rem;
 `;
 
 export const ProductsContentWrapper = styled.span`
