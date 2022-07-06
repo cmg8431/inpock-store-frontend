@@ -5,6 +5,9 @@ export const API_BASE_URL = "http://localhost:8000/api";
 export const API_SUFFIX = {
   LOGIN: "/login",
   DETAIL: "/detail",
+  REGISTER: "/register",
+  SMS: "/sms",
+  SMS_VERIFY: "/sms/verify",
 };
 
 export const instance = axios.create({

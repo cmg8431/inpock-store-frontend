@@ -24,12 +24,15 @@ module.exports = {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/order": "off",
+    "react/jsx-props-no-spreading": "off",
     "prettier/prettier": [
       "error",
       {
         endOfLine: "auto",
+        ignoreDestructuring: true,
       },
     ],
+    camelcase: ["error", { properties: "never", ignoreDestructuring: true }],
     "react/function-component-definition": [2, { namedComponents: "arrow-function" }],
   },
 
