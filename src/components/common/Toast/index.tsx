@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React from "react";
 import useToast from "src/hook/useToast";
 import * as S from "./styled";
 
@@ -11,18 +10,6 @@ export interface ToastProps {
 export const Toast: React.FC<ToastProps> = () => {
   const { toast, hideToast } = useToast();
   const { visible, template } = toast;
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   const handleRouteChange = () => {
-  //     hideToast({ template: toast?.template });
-  //   };
-  //   // location.events.on("routeChangeStart", handleRouteChange);
-  //   return () => {
-  //     handleRouteChange();
-  //     // location.events.off("routeChangeStart", handleRouteChange);
-  //   };
-  // }, [hideToast, toast?.template]);
 
   return (
     <S.ToastContainer visible={visible || false}>

@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./styled";
 import ArrowRightSVG from "src/assets/svg/ArrowRight.svg";
 import { Link } from "react-router-dom";
+import { Toast } from "src/components";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, title, src }) =>
       <Link to={src}>
         <ArrowRightSVG />
       </Link>
-
+      <Toast />
       {indentTitle.length >= 1 ? (
         <div style={{ margin: "1.5rem 0" }}>
           {indentTitle.map((title) => {
