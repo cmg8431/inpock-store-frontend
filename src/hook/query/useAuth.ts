@@ -5,7 +5,7 @@ import { getUser, login, LoginFormValues, UserProfileResponse } from "src/api/us
 import useToast from "../useToast";
 
 export const useLogin = (): UseMutationResult<
-  APIResponse<{ accessToken: string; refreshToken: string }>,
+  APIResponse<{ access_token: string; refresh_token: string }>,
   APIErrorResponse,
   LoginFormValues
 > => {
@@ -15,11 +15,11 @@ export const useLogin = (): UseMutationResult<
     onSuccess: (data: {
       status: APIResponseStatusType;
       message: string;
-      result: { accessToken: string; refreshToken: string; user: UserProfileResponse };
+      result: { access_token: string; refresh_token: string; user: UserProfileResponse };
     }) => {
-      localStorage.setItem("accessToken", data.result.accessToken);
-      localStorage.setItem("refreshToken", data.result.refreshToken);
-      setAccessToken(data.result.accessToken);
+      localStorage.setItem("accessToken", data.result.access_token);
+      localStorage.setItem("refreshToken", data.result.refresh_token);
+      setAccessToken(data.result.access_token);
       navigate("/mypage");
     },
     onError: (data) => {
