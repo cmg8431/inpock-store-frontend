@@ -1,15 +1,37 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import { AppLayout, CommonButton, TextField } from "src/components";
+import { AppLayout, Button, TextField } from "src/components";
+import { useForm } from "react-hook-form";
 
 export const TelCheckPage: React.FC = () => {
+  const { register, watch } = useForm();
+
   return (
     <AppLayout title="휴대폰 번호 인증" src="/auth/register/agree">
       <form style={{ margin: "0 0 3rem 0" }}>
-        <TextField style={{ marginBottom: "1rem" }} info="휴대폰 번호" placeholder="휴대폰 번호 입력" important />
-        {/* <CommonButton styleType="defaultBorder">인증받기</CommonButton> */}
-        <TextField placeholder="인증번호 입력" />
+        <TextField
+          style={{ marginBottom: "1rem" }}
+          {...register("phone", {
+            required: "필수 응답 항목입니다.",
+            maxLength: 11,
+          })}
+          info="휴대폰 번호"
+          placeholder="휴대폰 번호 입력"
+          maxLength={11}
+          important
+        />
+        <TextField
+          {...register("certification", {
+            maxLength: 4,
+          })}
+          pattern="[0-9]*"
+          maxLength={4}
+          placeholder="인증번호 입력"
+        />
       </form>
-      <CommonButton styleType="default">인증완료</CommonButton>
+      <Button disabled={!watch("phone") || !watch("certification")} variant="contained">
+        인증완료
+      </Button>
     </AppLayout>
   );
 };
