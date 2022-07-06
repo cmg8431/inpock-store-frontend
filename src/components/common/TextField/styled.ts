@@ -6,7 +6,7 @@ export const TextField = styled(Input)`
   border: 1px solid #cacaca;
   padding: 0.7rem 1rem;
   margin-top: 0rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0.8rem;
   color: #343434;
   transition: border 100ms ease 0s;
   font-size: 0.95rem;
