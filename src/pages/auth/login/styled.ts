@@ -25,6 +25,7 @@ export const LoginAuthFindWrapper = styled.p`
   font-weight: 400;
   letter-spacing: -0.03rem;
   justify-content: flex-end;
+  margin: 0rem 0rem 1rem;
 `;
 
 export const LoginOrderInquiry = styled.p`

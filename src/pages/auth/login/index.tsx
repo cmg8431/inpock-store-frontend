@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import * as S from "./styled";
-import { AppLayout, CommonButton, TextField, Toast } from "src/components";
+import { AppLayout, Button, TextField, Toast } from "src/components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "src/hook/query";
@@ -51,12 +51,12 @@ export const LoginPage: React.FC = () => {
         <S.LoginAuthFindWrapper>
           <S.LoginGoToLink to="/auth/find">아이디 / 비밀번호 찾기</S.LoginGoToLink>
         </S.LoginAuthFindWrapper>
-        <CommonButton styleType="default" type="submit">
+        <Button variant="contained" type="submit">
           {isLoading ? <span>로딩중</span> : <span>로그인</span>}
-        </CommonButton>
-        <CommonButton styleType="orangeBorder" onClick={() => navigate("/auth/register/agree")}>
+        </Button>
+        <Button variant="outlinedOrange" onClick={() => navigate("/auth/register/agree")}>
           3초만에 빠른 회원가입
-        </CommonButton>
+        </Button>
         <S.LoginOrderInquiry>
           <S.LoginGoToLink style={{ marginTop: "1rem" }} to="/">
             비회원 주문 조회
