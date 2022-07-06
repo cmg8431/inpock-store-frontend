@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { useMutation, UseMutationResult, useQuery, UseQueryResult } from "react-query";
+import { useMutation, UseMutationResult, useQuery, useQueryClient, UseQueryResult } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { APIErrorResponse, APIResponse, APIResponseStatusType, setAccessToken } from "src/api";
@@ -7,6 +7,7 @@ import {
   getUser,
   login,
   LoginFormValues,
+  logout,
   register,
   RegisterStep3Values,
   SmsFormValues,
@@ -60,24 +61,28 @@ export const useRegister = (): UseMutationResult<
   });
 };
 
-// export const useLogout = (): UseMutationResult<{ lastConnectedAt: string }, APIResponse, void> => {
-//   const navigate = useNavigate();
-
-//   return useMutation(
-//     "useLogout",
-//     () => {
-//       const token = localStorage.getItem("token");
-//       if (token) setAccessToken(token);
-//       return logout();
-//     },
-//     {
-//       onSuccess: () => {
-//         setAccessToken(null);
-//         localStorage.removeItem("token");
-//       },
-//     },
-//   );
-// };
+export const useLogout = (): UseMutationResult<{ lastConnectedAt: string }, APIResponse, void> => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation(
+    "useLogout",
+    () => {
+      const token = localStorage.getItem("accessToken");
+      if (token) setAccessToken(token);
+      return logout();
+    },
+    {
+      onSuccess: () => {
+        setAccessToken(null);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        queryClient.removeQueries("useFetchUser");
+        navigate("/mypage");
+        return getUser();
+      },
+    },
+  );
+};
 
 export const useSmsVerify = (): UseMutationResult<
   APIResponse<{ phone_number: string }>,
@@ -109,7 +114,7 @@ export const useFetchUser = (): UseQueryResult<APIResponse<UserProfileResponse>,
     },
     {
       onError: () => {
-        localStorage.removeItem("token");
+        localStorage.removeItem("accessToken");
         setAccessToken(null);
       },
       retry: 0,

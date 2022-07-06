@@ -4,6 +4,7 @@ export const API_BASE_URL = "http://localhost:8000/api";
 
 export const API_SUFFIX = {
   LOGIN: "/login",
+  LOGOUT: "/logout",
   DETAIL: "/detail",
   REGISTER: "/register",
   SMS: "/sms",

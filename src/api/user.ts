@@ -73,3 +73,8 @@ export const smsVerify = async ({ phone_number, auth_number }: SmsFormValues) =>
   const { data } = await instance.post(API_SUFFIX.SMS_VERIFY, { phone_number, auth_number });
   return data;
 };
+
+export const logout = async () => {
+  const { data } = await instance.post(API_SUFFIX.LOGOUT);
+  return data;
+};
