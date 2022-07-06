@@ -1,26 +1,10 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/require-default-props */
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import React, { InputHTMLAttributes } from "react";
+
 import * as S from "./styled";
-import ImportantSVG from "src/assets/svg/Important.svg";
 
-interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  info?: string;
-  important?: boolean;
-}
+interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ important = false, info, ...options }, ref) => {
-    return (
-      <>
-        {info && (
-          <S.Label>
-            <span style={{ marginRight: "0.2rem" }}>{info}</span>
-            {important && <ImportantSVG />}
-          </S.Label>
-        )}
-        <S.TextField ref={ref} {...options} />
-      </>
-    );
-  },
-);
+export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(({ ...options }, ref) => (
+  <S.InputElement ref={ref} {...options} />
+));
