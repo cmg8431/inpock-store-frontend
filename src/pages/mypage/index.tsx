@@ -1,9 +1,8 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable react/destructuring-assignment */
 import React from "react";
 import * as S from "./styled";
 import { Link } from "react-router-dom";
-import { AppLayout, CommonButton } from "src/components";
+import { AppLayout, Button } from "src/components";
 import { useFetchUser } from "src/hook/query";
 import ChevronRightSVG from "src/assets/svg/ChevronRight.svg";
 
@@ -27,10 +26,10 @@ export const MyPage: React.FC = () => {
     <AppLayout title="마이페이지" src="/">
       {isFetching ? null : user ? (
         <Link style={{ textDecoration: "none" }} to="/mypage/userinfo">
-          <CommonButton styleType="grayBackground">
+          <Button variant="containedGray">
             <span>{user.result.username}</span>
             <ChevronRightSVG />
-          </CommonButton>
+          </Button>
         </Link>
       ) : (
         <>
@@ -40,7 +39,7 @@ export const MyPage: React.FC = () => {
             셀러 별 포인트를 사용해보세요!
           </S.MyPageSubTitle>
           <Link to="/auth/login">
-            <CommonButton styleType="orangeBackground">로그인/회원가입</CommonButton>
+            <Button variant="containedOrange">로그인/회원가입</Button>
           </Link>
         </>
       )}
@@ -53,10 +52,10 @@ export const MyPage: React.FC = () => {
               {link.item.map((v) => {
                 return v.isUser ? (
                   <Link style={{ textDecoration: "none" }} to={v.link}>
-                    <CommonButton styleType="grayBackground">
+                    <Button variant="containedGray">
                       <span>{v?.title}</span>
                       <ChevronRightSVG />
-                    </CommonButton>
+                    </Button>
                   </Link>
                 ) : null;
               })}
