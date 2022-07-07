@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoginPage, MainPage, UserInfoPage, MyPage, TelCheckPage, SignUpPage, AgreePage } from "src/pages";
+import { SuccessPage } from "src/pages/auth/register/success";
 
 export const AppRouter: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ export const AppRouter: React.FC = () => {
             <Route path="agree" element={<AgreePage />} />
             <Route path="signup" element={<SignUpPage />} />
             <Route path="telcheck" element={<TelCheckPage />} />
+            <Route path="success" element={<SuccessPage />} />
           </Route>
         </Route>
       </Routes>
