@@ -15,7 +15,7 @@ export const TelCheckPage: React.FC = () => {
   const { showToast } = useToast();
   const [onClickSms, setOnClickSms] = useState<boolean>(false);
 
-  const verifcationCode = (e: React.FormEvent<HTMLFormElement>) => {
+  const verifcationCode = (e: any) => {
     e.preventDefault();
     sms(watch("phone_number"))
       .then((data) => showToast({ visible: true, template: data.message }))
@@ -45,7 +45,7 @@ export const TelCheckPage: React.FC = () => {
                 placeholder="휴대폰 번호 입력"
                 maxLength={11}
               />
-              <Button onClick={() => verifcationCode} variant="outlined">
+              <Button onClick={verifcationCode} variant="outlined">
                 {onClickSms ? <span>재발송</span> : <span>인증받기</span>}
               </Button>
             </S.TelcheckTextFieldContainer>
