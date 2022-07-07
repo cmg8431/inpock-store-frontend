@@ -1,6 +1,7 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable prefer-template */
+/* eslint-disable consistent-return */
 import React from "react";
+import * as S from "./styled";
 import { AppLayout, AuthLabelTextField, Button } from "src/components";
 import { useForm } from "react-hook-form";
 import { range } from "src/utils/range";
@@ -8,13 +9,16 @@ import { useRegister } from "src/hook/query";
 import { useRecoilValue } from "recoil";
 import { globalUserPrivacyInfo } from "src/store";
 import { RegisterStep3Values } from "src/api/user";
+import useToast from "src/hook/useToast";
 
 export const SignUpPage: React.FC = () => {
   const { register, watch, handleSubmit } = useForm();
   const { mutate } = useRegister();
+  const { showToast } = useToast();
   const { phone_number, tos_agree } = useRecoilValue(globalUserPrivacyInfo);
 
-  const onSubmit = ({ username, password, name }: RegisterStep3Values) => {
+  const onSubmit = ({ username, password, name, passwordConfig }: RegisterStep3Values) => {
+    if (password !== passwordConfig) return showToast({ visible: true, template: "비밀번호를 다시 확인해주세요." });
     mutate({
       username,
       password,
@@ -37,6 +41,7 @@ export const SignUpPage: React.FC = () => {
           importance
         />
         <AuthLabelTextField
+          type="password"
           className="비밀번호"
           placeholder="영문, 소문자, 숫자 조합 / 8~20자"
           {...register("password", {
@@ -45,10 +50,14 @@ export const SignUpPage: React.FC = () => {
           importance
         />
         <AuthLabelTextField
+          type="password"
           className="비밀번호 확인"
           placeholder="비밀번호를 다시 입력해주세요"
           {...register("passwordConfig", {
-            required: "필수 응답 항목입니다.",
+            required: {
+              value: true,
+              message: "비밀번호를 확인 해주세요.",
+            },
           })}
           importance
         />
@@ -60,9 +69,9 @@ export const SignUpPage: React.FC = () => {
           })}
           importance
         />
-        <label>생년월일</label>
-        <div>
-          <select
+        <S.SignUpPageTodaySelectLabel>생년월일</S.SignUpPageTodaySelectLabel>
+        <S.SignUpageTodaySelectContainer>
+          <S.SignUpPageTodaySelect
             {...register("year", {
               required: "필수 응답 항목입니다.",
             })}
@@ -71,8 +80,8 @@ export const SignUpPage: React.FC = () => {
             {range(new Date().getFullYear(), new Date().getFullYear() - 30, -1).map((date) => {
               return <option>{date}</option>;
             })}
-          </select>
-          <select
+          </S.SignUpPageTodaySelect>
+          <S.SignUpPageTodaySelect
             {...register("month", {
               required: "필수 응답 항목입니다.",
             })}
@@ -81,8 +90,8 @@ export const SignUpPage: React.FC = () => {
             {range(1, 12, 1).map((date) => {
               return <option>{("00" + date).slice(-2)}</option>;
             })}
-          </select>
-          <select
+          </S.SignUpPageTodaySelect>
+          <S.SignUpPageTodaySelect
             {...register("day", {
               required: "필수 응답 항목입니다.",
             })}
@@ -93,8 +102,8 @@ export const SignUpPage: React.FC = () => {
                 return <option>{("00" + date).slice(-2)}</option>;
               },
             )}
-          </select>
-        </div>
+          </S.SignUpPageTodaySelect>
+        </S.SignUpageTodaySelectContainer>
         <Button
           disabled={!watch("username") || !watch("password") || !watch("passwordConfig") || !watch("name")}
           variant="contained"
