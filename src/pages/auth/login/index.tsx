@@ -30,12 +30,7 @@ export const LoginPage: React.FC = () => {
           className="비밀번호"
           type="password"
           placeholder="비밀번호를 입력해주세요."
-          {...register("password", {
-            minLength: {
-              value: 8,
-              message: "비밀번호는 8자 이상이여야 합니다,",
-            },
-          })}
+          {...register("password", {})}
         />
         <S.LoginAuthFindWrapper>
           <S.LoginGoToLink to="/auth/find">아이디 / 비밀번호 찾기</S.LoginGoToLink>
