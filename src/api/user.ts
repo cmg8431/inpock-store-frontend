@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { APIResponse, API_SUFFIX, instance } from ".";
+import { APIResponse, API_SUFFIX, instance, setAccessToken } from ".";
 
 export interface LoginFormValues {
   username: string;
@@ -25,6 +25,7 @@ export type RegisterStep3Values = {
   phone_number?: string;
   birth_date?: string;
   tos_agree?: boolean;
+  passwordConfig?: string;
 };
 
 export const login = async ({
@@ -64,7 +65,7 @@ export const register = async ({
   return data;
 };
 
-export const smsText = async (phone_number: string) => {
+export const sms = async (phone_number: string) => {
   const { data } = await instance.post(API_SUFFIX.SMS, { phone_number });
   return data;
 };
@@ -76,5 +77,12 @@ export const smsVerify = async ({ phone_number, auth_number }: SmsFormValues) =>
 
 export const logout = async () => {
   const { data } = await instance.post(API_SUFFIX.LOGOUT);
+  return data;
+};
+
+export const getRefreshTokenAuth = async (): Promise<APIResponse<{ access_token: string }>> => {
+  const token = localStorage.getItem("refreshToken");
+  if (token) setAccessToken(token);
+  const { data } = await instance.post(API_SUFFIX.REFRESH, { refresh_token: token });
   return data;
 };

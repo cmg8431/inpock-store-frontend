@@ -1,9 +1,11 @@
+/* eslint-disable consistent-return */
 import { AxiosError } from "axios";
 import { useMutation, UseMutationResult, useQuery, useQueryClient, UseQueryResult } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { APIErrorResponse, APIResponse, APIResponseStatusType, setAccessToken } from "src/api";
 import {
+  getRefreshTokenAuth,
   getUser,
   login,
   LoginFormValues,
@@ -36,6 +38,8 @@ export const useLogin = (): UseMutationResult<
       navigate("/mypage");
     },
     onError: (data) => {
+      if (data.response?.data.message === undefined)
+        return showToast({ visible: true, template: "존재하지 않는 아이디입니다." });
       showToast({ visible: true, template: data.response?.data.message });
     },
     retry: 0,
@@ -44,10 +48,11 @@ export const useLogin = (): UseMutationResult<
 
 export const useRegister = (): UseMutationResult<
   APIResponse<{ access_token: string; refresh_token: string }>,
-  APIErrorResponse,
+  AxiosError<APIErrorResponse>,
   RegisterStep3Values
 > => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
   return useMutation("useRegister", register, {
     onSuccess: (data: {
       status: APIResponseStatusType;
@@ -55,7 +60,10 @@ export const useRegister = (): UseMutationResult<
       result: { access_token: string; refresh_token: string };
     }) => {
       localStorage.setItem("refreshToken", data.result.refresh_token);
-      navigate("/mypage");
+      navigate("/auth/register/success");
+    },
+    onError: (data) => {
+      showToast({ visible: true, template: data.response?.data.message });
     },
     retry: 0,
   });
@@ -64,6 +72,7 @@ export const useRegister = (): UseMutationResult<
 export const useLogout = (): UseMutationResult<{ lastConnectedAt: string }, APIResponse, void> => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   return useMutation(
     "useLogout",
     () => {
@@ -72,13 +81,13 @@ export const useLogout = (): UseMutationResult<{ lastConnectedAt: string }, APIR
       return logout();
     },
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
         setAccessToken(null);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         queryClient.removeQueries("useFetchUser");
         navigate("/mypage");
-        return getUser();
+        showToast({ visible: true, template: data.message });
       },
     },
   );
@@ -109,8 +118,15 @@ export const useFetchUser = (): UseQueryResult<APIResponse<UserProfileResponse>,
     "useFetchUser",
     () => {
       const token = localStorage.getItem("accessToken");
-      if (token) setAccessToken(token);
-      return getUser();
+      if (token) {
+        setAccessToken(token);
+        return getUser();
+      }
+      return getRefreshTokenAuth().then((data) => {
+        setAccessToken(data.result.access_token);
+        localStorage.setItem("accessToken", data.result.access_token);
+        return getUser();
+      });
     },
     {
       onError: () => {
